@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para ti 💛</title>
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: linear-gradient(to top, #fff0b3, #ffe066, #fff8dc);
+      font-family: "Dancing Script", cursive;
+      position: relative;
+    }
+
+    h1 {
+      font-family: "Great Vibes", cursive;
+      color: #e6b800;
+      font-size: 3rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      animation: latir 2s infinite;
+      z-index: 10;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.4rem;
+      margin-top: 10px;
+      color: #444;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .instruccion {
+      font-size: 1.2rem;
+      color: #b36b00;
+      margin-top: 15px;
+      font-style: italic;
+      z-index: 10;
+      text-align: center;
+      animation: parpadear 1.5s infinite;
+    }
+
+    @keyframes parpadear {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .ramo {
+      width: 220px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      animation: flotar 3s ease-in-out infinite;
+      z-index: 10;
+    }
+    .ramo:hover { transform: scale(1.1); }
+
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .mensaje {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #fff3b0;
+      color: #333;
+      font-size: 1.3rem;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: aparecer 1.5s ease;
+      z-index: 10;
+      line-height: 1.6;
+    }
+
+    @keyframes aparecer {
+      from {opacity: 0; transform: scale(0.5);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
+    @keyframes latir {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .escritura {
+      border-right: 3px solid #e6b800;
+      white-space: pre-wrap;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌻 Para ti, mi pulguita :3 🌻</h1>
+  <p>22 de septiembre, el día en que el mundo florece para recordarme que mi amor eres tú 🌻✨</p>
+
+  <div class="instruccion">✨ Dale click al ramo 🌻✨</div>
+
+  <img id="ramo" 
+       src="https://victorfloristeriapuebla.com/wp-content/uploads/2021/04/Ramo-kONYA-Ramo-de-Girasoles-Victor-Estudio-Floral_Mesa-de-trabajo-1_Mesa-de-trabajo-1-PhotoRoom.png-PhotoRoom.png" 
+       alt="Ramo de girasoles" 
+       class="ramo" 
+       onclick="mostrarCarta()">
+
+  <div class="mensaje" id="mensaje">
+    <div id="texto" class="escritura"></div>
+  </div>
+
+  <!-- Música -->
+  <audio id="musica" autoplay loop muted playsinline>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    const textoCarta = 
+    "💛 Mi pulguita, tú eres el girasol de mi vida, de mi día a día.\n" +
+    "Tú me llenas tanto de alegría 🌞, cada día, cada segundo, cada minuto contigo.\n" +
+    "Simplemente siento que, siempre que estoy triste o me siento mal 😔,\n" +
+    "ahí estás tú para alegrarme 💕 y sacarme una sonrisa 😊.\n" +
+    "TE AMO MUCHO MI AMOR 💛🌻✨ :3";
+
+    const musica = document.getElementById("musica");
+
+    // Quitar mute en la primera interacción
+    document.addEventListener("click", () => {
+      if (musica.muted) {
+        musica.muted = false;
+        musica.play();
+      }
+    }, { once: true });
+
+    function mostrarCarta() {
+      document.getElementById("ramo").style.display = "none";
+      document.getElementById("mensaje").style.display = "block";
+      document.querySelector(".instruccion").style.display = "none";
+      escribirTexto(textoCarta);
+    }
+
+    function escribirTexto(texto) {
+      const div = document.getElementById("texto");
+      div.textContent = "";
+      let i = 0;
+      const intervalo = setInterval(() => {
+        div.textContent += texto[i];
+        i++;
+        if (i >= texto.length) clearInterval(intervalo);
+      }, 50);
+    }
+  </script>
+</body>
+</html>
